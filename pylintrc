@@ -414,6 +414,8 @@ disable=missing-module-docstring,
         missing-class-docstring,
         missing-function-docstring,
         arguments-differ, # todo: delete it later
+        too-few-public-methods,
+        line-too-long,
         raw-checker-failed,
         bad-inline-option,
         locally-disabled,
