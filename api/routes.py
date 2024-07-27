@@ -13,4 +13,4 @@ async def plan_trip(request: TripRequest):
         response = await trip_planner.plan_trip(request)
         return response
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e

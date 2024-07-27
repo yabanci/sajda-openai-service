@@ -16,9 +16,9 @@ class GoogleMapsService:
             response.raise_for_status()  # Raises a HTTPError if the HTTP request returned an unsuccessful status code
             distance = response.json()["rows"][0]["elements"][0]["distance"]["value"]
             return distance
-        except requests.Timeout:
-            raise Exception("The request to the Google Maps API timed out")
+        except requests.Timeout as e:
+            raise Exception("The request to the Google Maps API timed out") from e
         except requests.RequestException as e:
             raise Exception(
                 f"An error occurred while requesting the Google Maps API: {str(e)}"
-            )
+            ) from e
