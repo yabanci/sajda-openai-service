@@ -1,11 +1,11 @@
 import openai
 
-from config.settings import OPENAI_API_KEY
+from config.settings import Secrets
 
 
 class OpenAIService:
     def __init__(self):
-        openai.api_key = OPENAI_API_KEY
+        openai.api_key = Secrets.OPENAI_API_KEY
 
     async def get_hotels(self, city, max_distance_to_mosque):
         openai_response = openai.chat.completions.create(
