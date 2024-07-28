@@ -1,14 +1,14 @@
-from openai import OpenAI
-
+import openai
 from config.settings import Secrets
 
 
 class OpenAIService:
     def __init__(self):
-        client = OpenAI(Secrets.OPENAI_API_KEY)
+        openai.api_key = Secrets.OPENAI_API_KEY
+        # self.client = OpenAI(api_key=Secrets.OPENAI_API_KEY)
 
     async def get_hotels(self, city, max_distance_to_mosque):
-        openai_response = self.client.chat.completions.create(
+        openai_response = openai.completions.create(
             model="text-davinci-003",
             prompt=f"List hotels in {city} within {max_distance_to_mosque} meters of the central mosque.",
             max_tokens=100,
@@ -17,7 +17,7 @@ class OpenAIService:
         return [{"name": hotel, "address": f"{hotel}, {city}"} for hotel in hotels]
 
     async def get_flights(self, departure_city, arrival_city, return_city, interval):
-        openai_response = self.client.chat.completions.create(
+        openai_response = openai.completions.create(
             model="text-davinci-003",
             prompt=f"Find flights from {departure_city} to {arrival_city} and returning from {return_city} within the interval {interval}.",
             max_tokens=100,
