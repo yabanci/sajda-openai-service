@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+
 from config.settings import Secrets
 
 from .routes import router
@@ -9,4 +10,4 @@ app = FastAPI()
 app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host=Secrets.APP_HOST, port=Secrets.APP_PORT)
+    uvicorn.run(app, host="0.0.0.0", port=9999)
