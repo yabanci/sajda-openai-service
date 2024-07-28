@@ -14,13 +14,12 @@ class OpenAIService:
             messages=[
                 {
                     "role": "user",
-                    "content": f"List hotels in {city} within {max_distance_to_mosque} meters of the central mosque.",
+                    "content": f"List hotels in {city} within {max_distance_to_mosque} meters of the central mosque. (in json format: name, city, link)",
                 }
             ],
-            max_tokens=100,
         )
-        hotels = openai_response.choices[0].message['content'].strip().split("\n")
-        return [{"name": hotel, "address": f"{hotel}, {city}"} for hotel in hotels]
+        hotels = openai_response.choices[0].message.content
+        return hotels
 
     async def get_flights(self, departure_city, arrival_city, return_city, interval):
         openai_response = openai.chat.completions.create(
@@ -28,9 +27,10 @@ class OpenAIService:
             messages=[
                 {
                     "role": "user",
-                    "content": f"Find flights from {departure_city} to {arrival_city} and returning from {return_city} within the interval {interval}.",                }
+                    "content": f"Find flights from {departure_city} to {arrival_city} and returning from {return_city} within the interval {interval}. (in json format: aviacompany, price in kzt, link)",
+                }
             ],
-            max_tokens=100,
         )
-        flights = openai_response.choices[0].message['content'].strip().split("\n")
+        flights = openai_response.choices[0].message.content
+        print(flights)
         return flights
