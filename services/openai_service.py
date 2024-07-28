@@ -1,4 +1,5 @@
 import openai
+import json
 
 from config.settings import OPENAI_API_KEY
 
@@ -18,7 +19,7 @@ class OpenAIService:
                 }
             ],
         )
-        hotels = openai_response.choices[0].message.content
+        hotels = json.loads(openai_response.choices[0].message.content)
         return hotels
 
     async def get_flights(self, departure_city, arrival_city, return_city, interval):
@@ -31,6 +32,5 @@ class OpenAIService:
                 }
             ],
         )
-        flights = openai_response.choices[0].message.content
-        print(flights)
+        flights = json.loads(openai_response.choices[0].message.content)
         return flights
