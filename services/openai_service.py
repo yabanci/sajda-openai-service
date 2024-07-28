@@ -29,7 +29,7 @@ class OpenAIService:
             messages=[
                 {
                     "role": "user",
-                    "content": f"Find flights from {departure_city} to {arrival_city} and returning from {return_city} within the interval {interval}. (in json format: aviacompany, price in kzt, link)",
+                    "content": f"Find flights from {departure_city} to {arrival_city} and returning from {return_city} within the interval {interval}. (in json format: aviacompany, (from-to location), price and currency (add also in usd and kzt), link)",
                 }
             ],
         )

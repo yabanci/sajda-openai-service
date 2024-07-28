@@ -20,9 +20,12 @@ class TripPlanner:
         hotels_in_mecca = await self.find_hotels(
             "Mecca", request.max_distance_to_mosque
         )
-        hotels_in_medina = await self.find_hotels(
-            "Medina", request.max_distance_to_mosque
-        )
+        try:
+            hotels_in_medina = await self.find_hotels(
+                "Medina", request.max_distance_to_mosque
+            )
+        except Exception as e:
+            return {f"Error finding hotels in Medina: {e}"}
         flights = await self.find_flights(
             request.city_of_departure,
             itinerary["arrival_city"],
