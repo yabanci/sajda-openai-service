@@ -50,10 +50,21 @@ class TripPlanner:
         hotels = await self.openai_service.get_hotels(city, max_distance_to_mosque)
         filtered_hotels = []
         for hotel in hotels:
-            distance = self.google_maps_service.get_distance_to_mosque(hotel, city)
-            if distance <= max_distance_to_mosque:
-                hotel["distance_to_mosque"] = distance
-                filtered_hotels.append(hotel)
+            try:
+                distance = self.google_maps_service.get_distance_to_mosque(hotel, city)
+                if distance <= max_distance_to_mosque:
+                    hotel["distance_to_mosque"] = distance
+                    filtered_hotels.append(
+                        {
+                            "name": hotel["name"],
+                            "city": hotel["city"],
+                            "link": hotel["link"],
+                            "distance_to_mosque": distance,
+                        }
+                    )
+            except Exception as e:
+                print(f"Error getting distance for hotel {hotel['name']}: {e}")
+
         return filtered_hotels
 
     async def find_flights(self, departure_city, arrival_city, return_city, interval):
