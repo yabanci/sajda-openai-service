@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+    volumes:
+      - .:/app

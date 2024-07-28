@@ -1,5 +1,6 @@
-import openai
 import json
+
+import openai
 
 from config.settings import OPENAI_API_KEY
 
