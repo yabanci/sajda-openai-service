@@ -1,8 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
 
-from config.settings import Secrets
-
 from .routes import router
 
 app = FastAPI()

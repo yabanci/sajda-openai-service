@@ -1,6 +1,6 @@
 import requests
 
-from config.settings import Secrets
+from config.settings import GOOGLE_MAPS_API_KEY
 
 
 class GoogleMapsService:
@@ -10,7 +10,7 @@ class GoogleMapsService:
             if city.lower() == "mecca"
             else "Al-Masjid an-Nabawi, Medina"
         )
-        url = f"https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins={hotel_address}&destinations={mosque_address}&key={Secrets.GOOGLE_MAPS_API_KEY}"
+        url = f"https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins={hotel_address}&destinations={mosque_address}&key={GOOGLE_MAPS_API_KEY}"
         try:
             response = requests.get(url, timeout=timeout)
             response.raise_for_status()  # Raises a HTTPError if the HTTP request returned an unsuccessful status code

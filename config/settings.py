@@ -1,8 +1,9 @@
-from loadenv import EnvEnum
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
 
 
-class Secrets(EnvEnum):
-    GOOGLE_MAPS_API_KEY: str = ()
-    OPENAI_API_KEY: str = ()
-    APP_HOST: str = ()
-    APP_PORT: str = ()
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
